@@ -1,0 +1,30 @@
+{
+  "name": "neo4j-nodejs",
+  "version": "1.0.0",
+  "description": "using neo4j in nodejs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hadiedrisi/Neo4j-Nodejs.git"
+  },
+  "keywords": [
+    "Neo4j"
+  ],
+  "author": "hadiedrisi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hadiedrisi/Neo4j-Nodejs/issues"
+  },
+  "homepage": "https://github.com/hadiedrisi/Neo4j-Nodejs#readme",
+  "dependencies": {
+    "nodemon": "*",
+    "morgan": "*",
+    "express": "*",
+    "ejs": "*",
+    "body-parser": "*"
+  }
+}
