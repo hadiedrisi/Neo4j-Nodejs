@@ -1,0 +1,14 @@
+<form method="post" action="/movie/add">
+    <label>Movie name</label><br>
+    <input type="text" name="movie_name"> <br>
+    <label>Year</label><br>
+    <input type ="text" name="movie_year"> <br><br>
+    <input type ="submit" value="Submit"> <br>
+</form>
+
+<h1>Movies</h1>
+<ul>
+<%movies.forEach((movie)=>{%>
+<li> <%=movie.title%> </li>
+<%})%>
+</ul>
