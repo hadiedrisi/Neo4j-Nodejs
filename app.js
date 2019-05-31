@@ -48,9 +48,25 @@ app.get('/', function (req, res) {
                 year:record._fields[0].properties.year.low
             })
         })
-        res.render('index',{
-            movies:MovieArr
+
+        session.run('MATCH (n:Actor) RETURN n LIMIT 25')
+        .then(function (result) {
+            var ActorArr = [];
+            result.records.forEach(function (record) {          
+                ActorArr.push({                   
+                    name:record._fields[0].properties.name,
+                })
+            })
+            console.log(ActorArr)
+            res.render('index',{
+                movies:MovieArr,
+                actors:ActorArr
+            })
         })
+        .catch(function (error) {
+            console.log(error);
+        });
+
     })
     .catch(function (error) {
         console.log(error);
@@ -58,19 +74,48 @@ app.get('/', function (req, res) {
 
 })
 
+
+// add routine  for insert a entity in graph db
 app.post('/movie/add',function(req,res){
     var title = req.body.movie_name;
     var year = req.body.movie_year;
     session
     .run('CREATE(n:Movie {title:{titleParam},year:{yearParam}}) RETURN n.title', {titleParam:title,yearParam:year} )
     .then(function(result){
-        
+        res.redirect('/');
     })
     .catch(err=>{
         console.log(err)
     })
     // console.log(name);
     // res.redirect('/')
+})
+
+app.post('/actor/add',function(req,res){
+    var name = req.body.actor_name;
+    session
+    .run('CREATE(n:Actor {name:{nameParam}}) RETURN n.name', {nameParam:name} )
+    .then(function(result){
+        res.redirect('/');
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+    
+})
+
+app.post('/movie/actor/add',function(req,res){
+    var name = req.body.actor_name;
+    var title = req.body.movie_name;
+    session
+    .run('MATCH (a:Actor {name:{nameParam}}) , (b:Movie {title:{titleParam}}) MERGE (a)-[r:ACTED_IN]-(b) RETURN a,b', {nameParam:name,titleParam:title} )
+    .then(function(result){
+        res.redirect('/');
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+    
 })
 
 // set listen port 

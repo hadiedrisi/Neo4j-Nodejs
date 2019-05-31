@@ -6,9 +6,33 @@
     <input type ="submit" value="Submit"> <br>
 </form>
 
+<form method="post" action="/actor/add">
+    <label>actor name</label><br>
+    <input type="text" name="actor_name"> <br><br>
+    <input type ="submit" value="Actor"> <br>
+</form>
+
+<form method="post" action="/movie/actor/add">
+    <label>Movie name</label><br>
+    <input type="text" name="movie_name"> <br>
+    <label>actor name</label><br>
+    <input type="text" name="actor_name"> <br><br>
+    <input type ="submit" value="Actor To Movie"> <br>
+</form>
+
+
+
 <h1>Movies</h1>
 <ul>
 <%movies.forEach((movie)=>{%>
 <li> <%=movie.title%> </li>
+<%})%>
+</ul>
+
+
+<h1>Actors</h1>
+<ul>
+<%actors.forEach((actor)=>{%>
+<li> <%=actor.name%> </li>
 <%})%>
 </ul>
